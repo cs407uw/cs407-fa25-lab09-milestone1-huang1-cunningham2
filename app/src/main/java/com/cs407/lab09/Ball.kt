@@ -66,8 +66,20 @@ class Ball(
      * boundary should be set to 0.
      */
     fun checkBoundaries() {
-        // TODO: implement the checkBoundaries function
-        // (Check all 4 walls: left, right, top, bottom)
+        // Check all 4 walls
+        if (this.posX - ballSize / 2f <= 0) { // Left wall
+            this.velocityX = 0f
+            this.accX = 0f
+        } else if (this.posX + ballSize / 2f >= backgroundWidth) { // Right wall
+            this.velocityX = 0f
+            this.accX = 0f
+        } else if (this.posY + ballSize / 2f >= backgroundHeight) { // Top wall
+            this.velocityY = 0f
+            this.accY = 0f
+        } else if (this.posY - ballSize / 2f <= 0) { // Bottom wall
+            this.velocityY = 0f
+            this.accY = 0f
+        }
     }
 
     /**
