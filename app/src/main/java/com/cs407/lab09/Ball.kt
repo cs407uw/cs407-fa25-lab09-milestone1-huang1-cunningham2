@@ -23,7 +23,6 @@ class Ball(
     private var isFirstUpdate = true
 
     init {
-        // Call reset()
         reset()
     }
 
@@ -39,13 +38,16 @@ class Ball(
             return
         }
 
-        if (xAcc !== 0.0f) { // X-axis acceleration
+        if (xAcc !== 0f) { // X-axis acceleration
             // Update position
             val distanceX = velocityX * dT + (1f / 6f) * dT * dT * (3f * accX + xAcc)
             this.posX = (this.velocityX < 0) ? this.posX - distanceX : this.posX + distanceX
+            checkBoundaries()
             
             // Update velocity
             this.velocityX += 0.5*(xAcc + this.accX)*(dT)
+
+            checkBoundaries()
         } else { // Y-axis acceleration
             // Update position
             val distanceY = velocityY * dT + (1f / 6f) * dT * dT * (3f * accY + yAcc)
@@ -53,6 +55,8 @@ class Ball(
 
             // Update velocity
             this.velocityY += 0.5*(yAcc + this.accY)*(dT)
+            
+            checkBoundaries()
         }   
     }
 
@@ -70,8 +74,13 @@ class Ball(
      * Resets the ball to the center of the screen with zero
      * velocity and acceleration.
      */
-    fun reset() {
-        // TODO: implement the reset function
-        // (Reset posX, posY, velocityX, velocityY, accX, accY, isFirstUpdate)
+    fun reset() {        
+        this.posX = backgroundWidth / 2f
+        this.posY = backgroundHeight / 2f
+        this.velocityX = 0f
+        this.velocityY = 0f
+        this.accX = 0f
+        this.accY = 0f
+        isFirstUpdate = true
     }
 }
