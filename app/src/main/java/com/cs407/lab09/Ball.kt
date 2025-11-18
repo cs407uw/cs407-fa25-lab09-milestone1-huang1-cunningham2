@@ -38,26 +38,30 @@ class Ball(
             return
         }
 
-        if (xAcc !== 0f) { // X-axis acceleration
-            // Update position
-            val distanceX = velocityX * dT + (1f / 6f) * dT * dT * (3f * accX + xAcc)
-            this.posX = (this.velocityX < 0) ? this.posX - distanceX : this.posX + distanceX
-            checkBoundaries()
-            
-            // Update velocity
-            this.velocityX += 0.5*(xAcc + this.accX)*(dT)
+        // X-axis
+        // Update position
+        val distanceX = velocityX * dT + (1f / 6f) * dT * dT * (3f * accX + xAcc)
+        this.posX += distanceX
+        checkBoundaries()
+        
+        // Update velocity
+        this.velocityX += 0.5*(xAcc + this.accX)*(dT)
 
-            checkBoundaries()
-        } else { // Y-axis acceleration
-            // Update position
-            val distanceY = velocityY * dT + (1f / 6f) * dT * dT * (3f * accY + yAcc)
-            this.posY = (this.velocityY < 0) ? this.posY - distanceY : this.posY + distanceY
+        // Update acceleration
+        this.accX = xAcc
+        
+        // Y-axis
+        // Update position
+        val distanceY = velocityY * dT + (1f / 6f) * dT * dT * (3f * accY + yAcc)
+        this.posY += distanceY
 
-            // Update velocity
-            this.velocityY += 0.5*(yAcc + this.accY)*(dT)
-            
-            checkBoundaries()
-        }   
+        // Update velocity
+        this.velocityY += 0.5*(yAcc + this.accY)*(dT)
+
+        // Update acceleration
+        this.accY = yAcc  
+
+        checkBoundaries()
     }
 
     /**
