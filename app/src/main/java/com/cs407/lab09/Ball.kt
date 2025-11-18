@@ -23,7 +23,8 @@ class Ball(
     private var isFirstUpdate = true
 
     init {
-        // TODO: Call reset()
+        // Call reset()
+        reset()
     }
 
     /**
@@ -38,6 +39,21 @@ class Ball(
             return
         }
 
+        if (xAcc !== 0.0f) { // X-axis acceleration
+            // Update position
+            val distanceX = velocityX * dT + (1f / 6f) * dT * dT * (3f * accX + xAcc)
+            this.posX = (this.velocityX < 0) ? this.posX - distanceX : this.posX + distanceX
+            
+            // Update velocity
+            this.velocityX += 0.5*(xAcc + this.accX)*(dT)
+        } else { // Y-axis acceleration
+            // Update position
+            val distanceY = velocityY * dT + (1f / 6f) * dT * dT * (3f * accY + yAcc)
+            this.posY = (this.velocityY < 0) ? this.posY - distanceY : this.posY + distanceY
+
+            // Update velocity
+            this.velocityY += 0.5*(yAcc + this.accY)*(dT)
+        }   
     }
 
     /**
