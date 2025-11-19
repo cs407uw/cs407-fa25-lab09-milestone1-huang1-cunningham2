@@ -45,7 +45,7 @@ class Ball(
         checkBoundaries()
         
         // Update velocity
-        this.velocityX += 0.5*(xAcc + this.accX)*(dT)
+        this.velocityX += 0.5f*(xAcc + this.accX)*(dT)
 
         // Update acceleration
         this.accX = xAcc
@@ -56,7 +56,7 @@ class Ball(
         this.posY += distanceY
 
         // Update velocity
-        this.velocityY += 0.5*(yAcc + this.accY)*(dT)
+        this.velocityY += 0.5f*(yAcc + this.accY)*(dT)
 
         // Update acceleration
         this.accY = yAcc  
