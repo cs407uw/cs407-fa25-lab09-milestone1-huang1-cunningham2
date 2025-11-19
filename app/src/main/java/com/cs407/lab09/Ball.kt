@@ -72,25 +72,25 @@ class Ball(
         // Left wall
         if (this.posX - ballSize / 2f <= 0) {
             this.posX = ballSize / 2f
-            this.velocityX = 0f
+            if (velocityX < 0) velocityX = 0f
         }
 
         // Right wall
         if (this.posX + ballSize / 2f >= backgroundWidth) {
             this.posX = backgroundWidth - ballSize / 2f
-            this.velocityX = 0f
+            if (velocityX > 0) velocityX = 0f
         }
 
         // Top wall
         if (this.posY + ballSize / 2f >= backgroundHeight) {
             this.posY = backgroundHeight - ballSize / 2f
-            this.velocityY = 0f
+            if (velocityY > 0) velocityY = 0f
         }
 
         // Bottom wall
         if (this.posY - ballSize / 2f <= 0) {
             this.posY = ballSize / 2f
-            this.velocityY = 0f
+            if (velocityY < 0) velocityY = 0f
         }
     }
 
