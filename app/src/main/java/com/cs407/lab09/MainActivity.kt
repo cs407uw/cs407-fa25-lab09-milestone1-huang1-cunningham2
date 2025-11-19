@@ -1,7 +1,6 @@
 package com.cs407.lab09
 
 import android.content.Context
-import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -67,7 +66,7 @@ fun GameScreen(viewModel: BallViewModel) {
     // Initialize the sensorManager
     val context = LocalContext.current
     val sensorManager = remember {
-        context.getSystemService(SENSOR_SERVICE) as SensorManager
+        context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
     // Get the gravitySensor
@@ -152,8 +151,8 @@ fun GameScreen(viewModel: BallViewModel) {
                         // Use the collected ballPosition to set the offset
                         // Hint: You need to convert Float to Int
                         IntOffset(
-                            x = ballPosition.x.roundToInt(),
-                            y = ballPosition.y.roundToInt()
+                            (ballPosition.x - ballSizePx / 2f).roundToInt(),
+                            (ballPosition.y - ballSizePx / 2f).roundToInt()
                         )
                     }
             )

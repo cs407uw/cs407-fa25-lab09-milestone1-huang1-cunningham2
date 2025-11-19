@@ -42,8 +42,7 @@ class Ball(
         // Update position
         val distanceX = velocityX * dT + (1f / 6f) * dT * dT * (3f * accX + xAcc)
         this.posX += distanceX
-        checkBoundaries()
-        
+
         // Update velocity
         this.velocityX += 0.5f*(xAcc + this.accX)*(dT)
 
@@ -70,19 +69,28 @@ class Ball(
      * boundary should be set to 0.
      */
     fun checkBoundaries() {
-        // Check all 4 walls
-        if (this.posX - ballSize / 2f <= 0) { // Left wall
+        // Left wall
+        if (this.posX - ballSize / 2f <= 0) {
+            this.posX = ballSize / 2f
             this.velocityX = 0f
-            this.accX = 0f
-        } else if (this.posX + ballSize / 2f >= backgroundWidth) { // Right wall
+        }
+
+        // Right wall
+        if (this.posX + ballSize / 2f >= backgroundWidth) {
+            this.posX = backgroundWidth - ballSize / 2f
             this.velocityX = 0f
-            this.accX = 0f
-        } else if (this.posY + ballSize / 2f >= backgroundHeight) { // Top wall
+        }
+
+        // Top wall
+        if (this.posY + ballSize / 2f >= backgroundHeight) {
+            this.posY = backgroundHeight - ballSize / 2f
             this.velocityY = 0f
-            this.accY = 0f
-        } else if (this.posY - ballSize / 2f <= 0) { // Bottom wall
+        }
+
+        // Bottom wall
+        if (this.posY - ballSize / 2f <= 0) {
+            this.posY = ballSize / 2f
             this.velocityY = 0f
-            this.accY = 0f
         }
     }
 
